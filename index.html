@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>秋のプログラム</title>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/index.css" rel="stylesheet">
+</head>
+<body>
+	<header>
+		<h1 class="text-center"><img id="header-image" src="image/fruit_kuri_kago.png"></h1>
+		<div id="main-carousel" class="carousel slide" data-ride="carousel">
+			<ol class="carousel-indicators">
+				<li class="active" data-target="#main-carousel" data-slide-to="0"></li>
+				<li data-target="#main-carousel" data-slide-to="1"></li>
+				<li data-target="#main-carousel" data-slide-to="2"></li>
+			</ol>
+			<div class="carousel-inner" role="listbox">
+				<div class="item active">
+					<a href="#"><img class="center-block" src="image/DSC_0019.jpg" alt="First slide"></a>
+				</div>
+				<div class="item">
+					<a href="#"><img class="center-block" src="image/DSC_0231.jpg" alt="Second slide"></a>
+				</div>
+				<div class="item">
+					<a href="#"><img class="center-block" src="image/DSC_0239.jpg" alt="Third slide"></a>
+				</div>
+			</div>
+			<a class="left carousel-control" href="#main-carousel" role="button" data-slide="prev">
+				<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+				<span class="sr-only">前へ</span>
+			</a>
+			<a class="right carousel-control" href="#main-carousel" role="button" data-slide="next">
+				<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+				<span class="sr-only">次へ</span>
+			</a>
+		</div>
+	</header>
+
+	<main class="container">
+		<div class="flex" style="margin-top: -30px;">
+			<canvas id="canvas-left" class="canvas-write" tabindex="1"></canvas>
+			<h2 id="fall-program" class="text-center">秋のプログラム</h2>
+			<canvas id="canvas-right" class="canvas-write" tabindex="1"></canvas>
+		</div>
+		<table class="table table-bordered">
+			<thead class="table-char">
+				<tr id="table-top">
+					<th class="col-sm-2 col-xs-2"></th>
+					<th class="col-sm-5 col-xs-5">午前</th>
+					<th class="col-sm-5 col-xs-5">午後</th>
+				</tr>
+			</thead>
+			<tbody class="table-char">
+				<tr>
+					<th><div id="day-1">(月)</div></th>
+					<td><div class="draggable-snap"></div><br><p class="draggable-snap">担当：</p></td>
+					<td><div class="draggable-snap"></div><br><p class="draggable-snap">担当：</p></td>
+				</tr>
+				<tr class="warning">
+					<th><div id="day-2">(火)</div></th>
+					<td><div class="draggable-snap"></div><br><p class="draggable-snap">担当：</p></td>
+					<td><div class="draggable-snap"></div><br><p class="draggable-snap">担当：</p></td>
+				</tr>
+				<tr>
+					<th><div id="day-3">(水)</div></th>
+					<td><div class="draggable-snap"></div><br><p class="draggable-snap">担当：</p></td>
+					<td><div class="draggable-snap"></div><br><p class="draggable-snap">担当：</p></td>
+				</tr>
+				<tr class="warning">
+					<th><div id="day-4">(木)</div></th>
+					<td><div class="draggable-snap"></div><br><p class="draggable-snap">担当：</p></td>
+					<td><div class="draggable-snap"></div><br><p class="draggable-snap">担当：</p></td>
+				</tr>
+				<tr>
+					<th><div id="day-5">(金)</div></th>
+					<td><div class="draggable-snap"></div><br><p class="draggable-snap">担当：</p></td>
+					<td><div class="draggable-snap"></div><br><p class="draggable-snap">担当：</p></td>
+				</tr>
+				<tr class="warning">
+					<th><div id="day-6">(土)</div></th>
+					<td><div class="draggable-snap"></div><br><p class="draggable-snap">担当：</p></td>
+					<td><div class="draggable-snap"></div><br><p class="draggable-snap">担当：</p></td>
+				</tr>
+			</tbody>
+		</table>
+
+		<div class="flex">
+			<div class="form-group col-sm-6 col-xs-6">
+				<label for="person">担当者セレクトボックス追加</label>
+				<input type="text" class="form-control" id="person-add-text">
+				<button type="button" class="btn btn-default add" id="person-add-select-box">追加</button>
+			</div>
+			<div class="form-group col-sm-6 col-xs-6">
+				<label for="program">プログラムセレクトボックス追加</label>
+				<input type="text" class="form-control" id="program-add-text">
+				<button type="button" class="btn btn-default add" id="program-add-select-box">追加</button>
+			</div>
+		</div>
+
+		<div class="flex">
+			<div class="form-group col-sm-6 col-xs-6">
+				<label for="person">担当者:</label>
+				<select class="form-control selectbox" id="person">
+					<option value=""></option>
+				</select>
+				<button type="button" class="btn btn-default add" id="person-add">担当者追加</button>
+			</div>
+			<div class="form-group col-sm-6 col-xs-6">
+				<label for="program">プログラム:</label>
+				<select class="form-control selectbox" id="program">
+					<option value=""></option>
+				</select>
+				<button type="button" class="btn btn-default add" id="program-add">プログラム追加</button>
+			</div>
+		</div>
+
+		<!-- Modal -->
+		<div class="modal fade" id="myModal" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+				  		<h4 class="modal-title">警告</h4>
+					</div>
+				<div class="modal-body">
+					<div class="alert alert-danger">
+						<p id="error"></p>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+				</div>
+			  </div>
+			</div>
+		</div>
+	</main>
+
+	<footer>
+		<div class="text-center"><img id="footer-image" src="image/fruit_kuri_kago.png"></div>
+	</footer>
+	
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+	
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+
+	<!-- Include all compiled plugins (below), or include individual files as needed --> 
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="js/index.js"></script>
+	<script src="js/dateSet.js"></script>
+	<script src="js/canvas.js"></script>
+
+</body>
+</html>
