@@ -70,17 +70,18 @@ function addSelectboxOneElement(selectboxId, textboxId) {
  * return void
  */
 function addDraggableElement(val, className) {
-    $("main").append("<div class=" + "'draggable " + className + " container table-char'>" + val + "</div>");
-    $( ".draggable" ).draggable({
-        helper : "clone",
+    $("#draggable-fix").append("<div class=" + "'draggable " + className + " container table-char'>" + val + "</div>");
+    $(".draggable").draggable({
+        helper: "clone",
         snap: ".draggable-snap",
+        appendTo: "body"
     }).dblclick(function (event) {
         $(this).remove();
     });
 
     // ドラッグ元をコピーして残す
-    $("body").droppable({
-        drop: function(event, ui) {
+    $("table").droppable({
+        drop: function (event, ui) {
             // コピーしたクローンは残さない
             if (!$(ui.helper).hasClass("draggable-clone")) {
                 $(ui.helper).removeClass("draggable");
@@ -92,7 +93,7 @@ function addDraggableElement(val, className) {
                     $(this).remove();
                 });
             }
-        }
+        },
     });
 }
 
@@ -123,3 +124,17 @@ function addSelectboxElementAndDisplay(id, array) {
         addDraggableElement(selectboxElement.eq(index).text(), className);
     });
 }
+
+// クリック時にドラッグできる要素群を下部に固定する
+$("table").on("click", function () {
+    $("#draggable-fix").addClass("fixed");
+});
+
+const NUM_RIGHT_CLICK = 3;
+// 右クリック時にドラッグできる要素群を下部に固定から元に戻す
+$("table").on("mousedown", function(e) {
+      if (e.which === NUM_RIGHT_CLICK) {
+        $("#draggable-fix").removeClass("fixed"); 
+      }
+});
+    
