@@ -8,7 +8,7 @@ $.ajax({
     .then(
         function (data) {
             const arrayPerson = data.split(/\r\n|\r|\n/);
-            addSelectboxElementAndDisplay("#person", arrayPerson);
+            addDraggableElementAndDisplay("#person", arrayPerson);
         },
         function () {
             //1回だけダイアログを表示する
@@ -22,45 +22,22 @@ $.ajax({
     .then(
         function (data) {
             const arrayProgram = data.split(/\r\n|\r|\n/);
-            addSelectboxElementAndDisplay("#program", arrayProgram);
+            addDraggableElementAndDisplay("#program", arrayProgram);
         },
         function () {});
 
 // 担当者追加ボタンクリックイベント
-$("#person-add").on("click", function () {
-    const person = $("#person option:selected").text();
-    addDraggableElement(person, "added-person");
+$("#person-add-button").on("click", function () {
+    addDraggableElement($("#person-add-text").val(), "added-person");
+    $("#person-add-text").val("");
 });
 
-// プログラム追加ボタンクリックイベント
-$("#program-add").on("click", function () {
-    const program = $("#program option:selected").text();
-    addDraggableElement(program);
+// プログラム追加ボタンクリック
+$("#program-add-button").on("click", function () {
+    addDraggableElement($("#program-add-text").val());
+    $("#program-add-text").val("");
 });
 
-// 担当者セレクトボックス追加テキストボックスクリックイベント
-$("#person-add-select-box").on("click", function () {
-    addSelectboxOneElement("#person", "#person-add-text")
-});
-
-// プログラムセレクトボックス追加テキストボックスクリックイベント
-$("#program-add-select-box").on("click", function () {
-    addSelectboxOneElement("#program", "#program-add-text")
-});
-
-/*
- * セレクトボックスにテキストボックスに書かれた要素を１つ追加する
- * @param String 対象セレクトボックスid (ex."#person")
- * @param String 対象テキストボックスid (ex."#person-add-text")
- * return void
- */
-function addSelectboxOneElement(selectboxId, textboxId) {
-    const text = $(textboxId).val();
-    if (text !== "") {
-        $(selectboxId).append($("<option>").html(text).val(text));
-        $(textboxId).val("");
-    }
-}
 
 /*
  * ドラッグアンドドロップ可能な要素を追加する。ダブルクリックで要素を消せるようにも設定。
@@ -98,21 +75,12 @@ function addDraggableElement(val, className) {
 }
 
 /*
- * 第一引数のIDのセレクトボックスに対して第二引数の配列の値を追加する。
- * 最後にセレクトボックスの全ての中身をD＆D可能な要素として表示する。
+ * セレクトボックスの全ての中身をD＆D可能な要素として表示する。
  * @param String (ex. "#person")
  * @param array 
  * return void
  */
-function addSelectboxElementAndDisplay(id, array) {
-    array.forEach(function (element) {
-        if (element !== "") {
-            $(id).append($("<option>").html(element).val(element));
-        }
-    });
-
-    const selectboxElement = $(id).children();
-
+function addDraggableElementAndDisplay(id, array) {
     let className = "";
 
     // idが担当者のみクラス要素を追加
@@ -120,8 +88,8 @@ function addSelectboxElementAndDisplay(id, array) {
         className = "added-person"
     }
 
-    Object.keys(selectboxElement).forEach(function (value, index) {
-        addDraggableElement(selectboxElement.eq(index).text(), className);
+    array.forEach(function (value, index) {
+        addDraggableElement(value, className);
     });
 }
 

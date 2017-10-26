@@ -8,16 +8,10 @@
 	margin-bottom: -15px;
 }
 
-#person-add,
-#program-add
+#person-add-button,
+#program-add-button
  {
 	background: #FACD89;
-	margin-top: 5px;
-}
-#person-add-select-box,
-#program-add-select-box
-{
-	background: #ffdead;
 	margin-top: 5px;
 }
 .canvas-write {
