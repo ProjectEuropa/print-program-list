@@ -1,7 +1,7 @@
 const AJAX_ERROR_MSG = "phpビルトインサーバー等を起動してサーバー上でhtmlにアクセスしてください。";
 
 // phpビルトインサーバー等を起動してサーバー上でhtmlにアクセスすること
-// テキストファイルからデータを取り出しセレクトボックスに値を入れる
+// テキストファイルからデータを取り出しドラッグ可能な要素として表示する
 $.ajax({
         url: "data/person.txt"
     })
@@ -11,7 +11,7 @@ $.ajax({
             addDraggableElementAndDisplay("#person", arrayPerson);
         },
         function () {
-            //1回だけダイアログを表示する
+            //1回だけエラーメッセージダイアログを表示する
             $("#error").html(AJAX_ERROR_MSG);
             $("#myModal").modal("show");
         });
@@ -75,7 +75,7 @@ function addDraggableElement(val, className) {
 }
 
 /*
- * セレクトボックスの全ての中身をD＆D可能な要素として表示する。
+ * テキストファイルから全ての中身をD＆D可能な要素として表示する。
  * @param String (ex. "#person")
  * @param array 
  * return void
